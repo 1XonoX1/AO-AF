@@ -92,16 +92,16 @@ local AutoFishToggle = AutoFishTab:Toggle({
         end
         
         if state and StartLogging then
-            AutoFishEnabled = true
-            StartLogging()
+            _G.AutoFishEnabled = true
+            _G.StartLogging()
             
             WindUI:Notify({
                 Title = "Enabled Auto Fish",
                 Duration = 5,
             })
         else
-            AutoFishEnabled = false
-            StopAll()
+            _G.AutoFishEnabled = false
+            _G.StopAll()
             
             WindUI:Notify({
                 Title = "Disabled Auto Fish",
@@ -131,7 +131,7 @@ Not recommended to modify.
         Default = 8,
     },
     Callback = function (value)
-        ReelSpeedValue = value
+        _G.ReelSpeedValue = value
     end
 })
 
@@ -150,7 +150,7 @@ For example, if the speed is set to 8 and randomness is 0.5, the actual CPS will
         Default = 0.5,
     },
     Callback = function (value)
-        ReelSpeedRandomnessValue = value
+        _G.ReelSpeedRandomnessValue = value
     end
 })
 
@@ -172,7 +172,7 @@ Controls how many seconds to wait before casting the rod again.
         Default = 5,
     },
     Callback = function (value)
-        SecondsWaitForReelAgain = value
+        _G.SecondsWaitForReelAgain = value
     end
 })
 
