@@ -1,3 +1,5 @@
+local WindUI = _G.WindUI
+
 local Window = WindUI:CreateWindow({
     Title = "Auto Fish | By Xono",
     Icon = "ship",
