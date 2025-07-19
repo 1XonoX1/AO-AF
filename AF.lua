@@ -21,12 +21,12 @@ local function CastAgain ()
     local EquippedRod = GetEquippedRod()
     
     if not EquippedRod then
-        ShouldReel = false
+        _G.ShouldReel = false
         print("🎣 No rod equipped")
         return
     end
     
-    if not AutoFishEnabled then
+    if not _G.AutoFishEnabled then
         return
     end
 
@@ -35,7 +35,7 @@ local function CastAgain ()
 end
 
 local function StopReeling ()
-    ShouldReel = false
+    _G.ShouldReel = false
     
     if CompleteListener then
         CompleteListener:Disconnect()
@@ -61,9 +61,9 @@ local function StartReeling (Item)
             if tostring(Player) == tostring(LocalPlayer) and tostring(Action) == "Complete" then
                 print("🎣 Caught. Stopping reel")
                 
-                if LastCatch then
+                if _G.LastCatch then
                     WindUI:Notify({
-                        Title = "Caught " .. LastCatch,
+                        Title = "Caught " .. _G.LastCatch,
                         Duration = 5
                     })
                 end
@@ -73,20 +73,20 @@ local function StartReeling (Item)
         end    
     )
 
-    while ShouldReel do
+    while _G.ShouldReel do
         local EquippedRod = GetEquippedRod()
     
         if not EquippedRod then
-            ShouldReel = false
+            _G.ShouldReel = false
             print("🎣 No rod equipped")
-            StopReeling()
+            _G.StopReeling()
             break
         end
         
         ToolActionRemote:FireServer(EquippedRod)
         
-        local MinCPS = ReelSpeedValue - ReelSpeedRandomnessValue
-        local MaxCPS = ReelSpeedValue + ReelSpeedRandomnessValue
+        local MinCPS = _G.ReelSpeedValue - _G.ReelSpeedRandomnessValue
+        local MaxCPS = _G.ReelSpeedValue + _G.ReelSpeedRandomnessValue
         local ActualCPS = MinCPS + math.random() * (MaxCPS - MinCPS)
         
         if ActualCPS == 0 or ActualCPS < 0.01 then
@@ -100,7 +100,7 @@ local function StartReeling (Item)
     end
 end
 
-local function StartLogging ()
+_G.StartLogging = function ()
     print("🎣 Listening to FishEvent")
     
     FishEventListener = FishEventRemote.OnClientEvent:Connect(
@@ -110,13 +110,13 @@ local function StartLogging ()
             end
             
             if tostring(Player) == tostring(LocalPlayer) and tostring(Action) == "Bite" then
-                if not ShouldReel then
+                if not _G.ShouldReel then
                     print("🎣 Your fish bite detected. Item:", tostring(Item))
-                    LastCatch = tostring(Item)
-                    ShouldReel = true
+                    _G.LastCatch = tostring(Item)
+                    _G.ShouldReel = true
                     coroutine.wrap(
                         function ()
-                            StartReeling(Item)
+                            _G.StartReeling(Item)
                         end
                     )()
                 end
@@ -125,9 +125,9 @@ local function StartLogging ()
     )
 end
 
-local function StopAll ()
+_G.StopAll = function ()
     print("🎣 Stopping All")
-    ShouldReel = false
+    _G.ShouldReel = false
     
     if CompleteListener then
         CompleteListener:Disconnect()
