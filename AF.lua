@@ -10,8 +10,6 @@ local ToolActionRemote = ReplicatedStorage:WaitForChild("RS"):WaitForChild("Remo
 local CompleteListener = nil
 local FishEventListener = nil
 
-local LastCatch = nil
-
 local function GetEquippedRod ()
     local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
     
