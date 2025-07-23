@@ -26,7 +26,7 @@ getgenv().SendWebhook = function ()
     --     attachments = {}
     -- })
 
-    local Title = (getgenv().LastCatch and (getgenv().LastCatch.Alt .. " ") or "") .. getgenv().LastCatch.Name
+    local Title = (getgenv().LastCatch and getgenv().LastCatch.Alt and (getgenv().LastCatch.Alt .. " ") or "") .. getgenv().LastCatch.Name
     local CaughAt = os.date("*t", getgenv().LastCatch.Caught)
     local Description = string.format(
         "Caught at: %02d/%02d/%d %02d:%02d:%02d",
