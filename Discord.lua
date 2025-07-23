@@ -17,7 +17,7 @@ getgenv().SendWebhook = function ()
     end
 
     local JSONData = HttpService:JSONEncode({
-        content = "Caught: " .. LastCatch,
+        content = "Caught: " .. getgenv().LastCatch,
         username = DefaultWebhookAuthor
     })
 
