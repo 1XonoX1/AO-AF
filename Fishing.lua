@@ -181,7 +181,7 @@ local function StartReeling (Item)
 
         local RandomReelClickWait = 1.0 / ActualCPS
 
-        print("AutoFish | Waiting:", string.format("%.2f", RandomReelClickWait), "seconds")
+        print("AutoFish | Waiting", string.format("%.2f", RandomReelClickWait), "seconds", "(" .. ActualCPS .. " CPS)")
         task.wait(RandomReelClickWait)
     end
 end
