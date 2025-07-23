@@ -81,7 +81,6 @@ local function FindDishes ()
                     local ItemName = Item:FindFirstChild("ToolName") and Item.ToolName.Text
 
                     if ItemName and (not OnlyFishFood or string.find(ItemName, "Fish")) then
-                        print("Dish found:", ItemName)
                         local ToolEquivalent = Backpack and Backpack:FindFirstChild(ItemName)
                         if ToolEquivalent and ToolEquivalent:IsA("Tool") then
                             table.insert(Dishes, ToolEquivalent)
@@ -102,6 +101,9 @@ end
 local function EquipFirstDish ()
     local Dishes = FindDishes()
     local FirstDish = Dishes[1]
+
+    print("AutoFish | Found dish:", FirstDish.Name)
+
     LocalPlayer.Character.Humanoid:EquipTool(FirstDish)
     task.wait()
 
@@ -115,12 +117,12 @@ getgenv().EatDish = function ()
     end
 
     local DishName = EquipFirstDish().Name
-    print("Eating:", DishName)
+    print("AutoFish | Eating:", DishName)
 
     local HungerUpdated = false
     HungerUpdateListener = AmountLabel:GetPropertyChangedSignal("Text"):Connect(
         function()
-            print("Hunger updated:", AmountLabel.Text)
+            print("AutoFish | Hunger updated:", AmountLabel.Text)
             HungerUpdated = true
             HungerUpdateListener:Disconnect()
             HungerUpdateListener = nil
