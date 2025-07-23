@@ -137,11 +137,15 @@ local function StopReeling ()
         NotificationListener = nil
     end
 
-    getgenv().SendWebhook()
-    getgenv().WindUI:Notify({
-        Title = "Caught " .. getgenv().LastCatch,
-        Duration = 5
-    })
+    coroutine.wrap(
+        function ()
+            getgenv().SendWebhook()
+            getgenv().WindUI:Notify({
+                Title = "Caught " .. (getgenv().LastCatch.Alt and (getgenv().LastCatch.Alt .. " ") or "") .. getgenv().LastCatch.Name,
+                Duration = 5
+            })
+        end
+    )()
 
     if getgenv().AutoEatToggle.Value then
         CheckAutoEat()
@@ -181,7 +185,7 @@ local function StartReeling (Item)
                         local ParsedJSON = HttpService:JSONDecode(Data)
 
                         if ParsedJSON then
-                            getgenv().LastCatch = (ParsedJSON.Alt and (ParsedJSON.Alt .. " ") or "") .. ParsedJSON.Name
+                            getgenv().LastCatch = ParsedJSON
                         end
 
                         StopReeling()
@@ -232,7 +236,6 @@ getgenv().StartLogging = function ()
             if tostring(Player) == tostring(LocalPlayer) and tostring(Action) == "Bite" then
                 if not ShouldReel then
                     print("AutoFish | Your fish bite detected. Item:", tostring(Item))
-                    getgenv().LastCatch = tostring(Item)
                     ShouldReel = true
                     coroutine.wrap(
                         function ()
