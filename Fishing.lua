@@ -110,7 +110,7 @@ local function CheckAutoEat ()
 
     local ParsedAmount = tonumber(AmountLabel.Text)
 
-    if ParsedAmount > getgenv().AutoEatLevelSlider.Value.Default then
+    if ParsedAmount > tonumber(getgenv().AutoEatLevelSlider.Value.Default) then
         return
     end
 
@@ -137,13 +137,13 @@ local function StopReeling ()
         Duration = 5
     })
 
-    print("AutoFish | Stopped reeling, waiting", getgenv().CastAgainWaitSlider.Value.Default, "seconds")
-    task.wait(getgenv().CastAgainWaitSlider.Value.Default)
-
     if getgenv().AutoEatToggle.Value then
         CheckAutoEat()
         task.wait()
     end
+
+    print("AutoFish | Stopped reeling, waiting", getgenv().CastAgainWaitSlider.Value.Default, "seconds")
+    task.wait(getgenv().CastAgainWaitSlider.Value.Default)
 
     CastAgain()
 end
