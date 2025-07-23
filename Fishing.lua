@@ -115,8 +115,8 @@ local function StopReeling ()
         Duration = 5
     })
 
-    print("AutoFish | Stopped reeling, waiting", getgenv().CastAgainWaitSlider.Value, "seconds")
-    task.wait(getgenv().CastAgainWaitSlider.Value)
+    print("AutoFish | Stopped reeling, waiting", getgenv().CastAgainWaitSlider.Value.Default, "seconds")
+    task.wait(getgenv().CastAgainWaitSlider.Value.Default)
 
     CastAgain()
 end
@@ -171,7 +171,6 @@ local function StartReeling (Item)
         ToolActionRemote:FireServer(EquippedRod)
 
         -- Why is default the actual value?
-        print(getgenv().ReelSpeedSlider.Value.Default)
         local MinCPS = getgenv().ReelSpeedSlider.Value.Default - getgenv().ReelSpeedRandomnessSlider.Value.Default
         local MaxCPS = getgenv().ReelSpeedSlider.Value.Default + getgenv().ReelSpeedRandomnessSlider.Value.Default
         local ActualCPS = MinCPS + math.random() * (MaxCPS - MinCPS)
