@@ -170,7 +170,13 @@ local function StartReeling (Item)
 
         ToolActionRemote:FireServer(EquippedRod)
 
-        print(getgenv().ReelSpeedSlider.Value, getgenv().ReelSpeedRandomnessSlider.Value)
+        for i,v in pairs(getgenv().ReelSpeedSlider.Value) do
+            print(i, v)
+        end
+
+        for i,v in pairs(getgenv().ReelSpeedRandomnessSlider.Value) do
+            print(i, v)
+        end
 
         local MinCPS = getgenv().ReelSpeedSlider.Value - getgenv().ReelSpeedRandomnessSlider.Value
         local MaxCPS = getgenv().ReelSpeedSlider.Value + getgenv().ReelSpeedRandomnessSlider.Value
