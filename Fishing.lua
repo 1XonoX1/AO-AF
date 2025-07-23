@@ -10,6 +10,8 @@ local FishEventRemote = ReplicatedStorage:WaitForChild("RS"):WaitForChild("Remot
 local NotificationRemote = ReplicatedStorage:WaitForChild("RS"):WaitForChild("Remotes"):WaitForChild("UI"):WaitForChild("Notification")
 local ToolActionRemote = ReplicatedStorage:WaitForChild("RS"):WaitForChild("Remotes"):WaitForChild("Misc"):WaitForChild("ToolAction")
 
+local PlayerGui = LocalPlayer:FindFirstChild("PlayerGui")
+
 local Map = workspace:WaitForChild("Map")
 
 local CompleteListener = nil
@@ -96,6 +98,26 @@ local function CastAgain ()
     ToolActionRemote:FireServer(EquippedRod)
 end
 
+local function CheckAutoEat ()
+    local AmountLabel = PlayerGui
+        :WaitForChild("MainGui")
+        :WaitForChild("UI")
+        :WaitForChild("HUD")
+        :WaitForChild("Anchor")
+        :WaitForChild("HungerBar")
+        :WaitForChild("Back")
+        :WaitForChild("Amount")
+
+    local ParsedAmount = tonumber(AmountLabel.Text)
+
+    if ParsedAmount > getgenv().AutoEatLevelSlider.Value.Default then
+        return
+    end
+
+    getgenv().StopAll()
+    getgenv().EatDish()
+end
+
 local function StopReeling ()
     ShouldReel = false
 
@@ -117,6 +139,11 @@ local function StopReeling ()
 
     print("AutoFish | Stopped reeling, waiting", getgenv().CastAgainWaitSlider.Value.Default, "seconds")
     task.wait(getgenv().CastAgainWaitSlider.Value.Default)
+
+    if getgenv().AutoEatToggle.Value then
+        CheckAutoEat()
+        task.wait()
+    end
 
     CastAgain()
 end
