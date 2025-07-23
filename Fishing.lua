@@ -112,7 +112,7 @@ local function CheckAutoEat ()
 
     local PreviousRod = GetEquippedRod()
 
-    if ParsedAmount <= tonumber(getgenv().AutoEatLevelSlider.Value.Default) then 
+    if ParsedAmount <= tonumber(getgenv().AutoEatLevelSlider.Value.Default) then
         getgenv().EatDish()
     end
 
@@ -120,6 +120,7 @@ local function CheckAutoEat ()
 
     task.wait(1)
 
+    print("AutoFish | Equipping rod again")
     LocalPlayer.Character.Humanoid:EquipTool(PreviousRod)
 end
 
