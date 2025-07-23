@@ -137,6 +137,7 @@ getgenv().EatDish = function ()
     until
         HungerUpdated
 
+    task.wait(1)
     local ParsedAmount = tonumber(AmountLabel.Text)
 
     if ParsedAmount < 100 then
