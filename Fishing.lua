@@ -114,8 +114,14 @@ local function CheckAutoEat ()
         return
     end
 
+    local PreviousRod = GetEquippedRod()
+
     getgenv().StopAll()
     getgenv().EatDish()
+
+    task.wait(0.5)
+
+    LocalPlayer.Character.Humanoid:EquipTool(PreviousRod)
 end
 
 local function StopReeling ()
