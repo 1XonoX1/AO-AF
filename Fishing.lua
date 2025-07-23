@@ -171,6 +171,7 @@ local function StartReeling (Item)
         ToolActionRemote:FireServer(EquippedRod)
 
         -- Why is default the actual value?
+        print(getgenv().ReelSpeedSlider.Value.Default)
         local MinCPS = getgenv().ReelSpeedSlider.Value.Default - getgenv().ReelSpeedRandomnessSlider.Value.Default
         local MaxCPS = getgenv().ReelSpeedSlider.Value.Default + getgenv().ReelSpeedRandomnessSlider.Value.Default
         local ActualCPS = MinCPS + math.random() * (MaxCPS - MinCPS)
