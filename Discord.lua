@@ -16,10 +16,15 @@ getgenv().SendWebhook = function ()
         return
     end
 
-    local JSONData = HttpService:JSONEncode({
-        content = "Caught: " .. getgenv().LastCatch,
-        username = DefaultWebhookAuthor
-    })
+    -- local JSONData = HttpService:JSONEncode({
+    --     embeds = [
+    --         {
+    --             title = "Caught: " .. getgenv().LastCatch
+    --         }
+    --     ],
+    --     username = "AutoFish | By XonoX",
+    --     attachments = {}
+    -- })
 
     if Request then
         local Response = Request({
@@ -28,7 +33,7 @@ getgenv().SendWebhook = function ()
             Headers = {
                 ["Content-Type"] = "application/json"
             },
-            Body = JSONData
+            Body = "{\"content\":null,\"embeds\":[{\"title\":\"Caught: " .. getgenv().LastCatch .."\",\"color\":16777214}],\"username\":\"AutoFish | By XonoX\",\"attachments\":[]}"
         })
 
         print("AutoFish | Webhook message sent. Status code:", Response.StatusCode)
