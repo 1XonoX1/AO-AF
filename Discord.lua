@@ -45,7 +45,7 @@ getgenv().SendWebhook = function ()
             Headers = {
                 ["Content-Type"] = "application/json"
             },
-            Body = "{\"content\":null,\"embeds\":[{\"title\":\"Caught: " .. Title .."\",\"description\": \"" .. Description .."\",\"color\":16777214}],\"username\":\"AutoFish | By XonoX\",\"attachments\":[]}"
+            Body = "{\"content\":null,\"embeds\":[{\"title\":\"" .. Title .."\",\"description\": \"" .. Description .."\",\"color\":16777214}],\"username\":\"AutoFish | By XonoX\",\"attachments\":[]}"
         })
 
         print("AutoFish | Webhook message sent. Status code:", Response.StatusCode)
