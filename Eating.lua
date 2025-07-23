@@ -102,7 +102,7 @@ local function EquipFirstDish ()
     local Dishes = FindDishes()
     local FirstDish = Dishes[1]
 
-    print("AutoFish | Found dish:", FirstDish.Name)
+    print("AutoFish | Found", #Dishes, " dishes")
 
     LocalPlayer.Character.Humanoid:EquipTool(FirstDish)
     task.wait()
