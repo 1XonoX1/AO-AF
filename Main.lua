@@ -8,6 +8,7 @@ getgenv().LastCatch = nil
 getgenv().AutoFishToggle = nil
 getgenv().ReelSpeedSlider = nil
 getgenv().ReelSpeedRandomnessSlider = nil
+getgenv().CastAgainWaitSlider = nil
 getgenv().DiscordWebhookToggle = nil
 getgenv().DiscordWebhookTokenInput = nil
 
@@ -17,15 +18,15 @@ local HttpService = game:GetService("HttpService")
 
 -- Discord Code
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/1XonoX1/AO-AF/refs/heads/main/Discord.lua"))
+loadstring(game:HttpGet("https://raw.githubusercontent.com/1XonoX1/AO-AF/refs/heads/main/Discord.lua"))()
 
 -- Main Code
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/1XonoX1/AO-AF/refs/heads/main/Fishing.lua"))
+loadstring(game:HttpGet("https://raw.githubusercontent.com/1XonoX1/AO-AF/refs/heads/main/Fishing.lua"))()
 
 -- ESP Code
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/1XonoX1/AO-AF/refs/heads/main/ESP.lua"))
+loadstring(game:HttpGet("https://raw.githubusercontent.com/1XonoX1/AO-AF/refs/heads/main/ESP.lua"))()
 
 -- UI Code
 
@@ -203,7 +204,7 @@ local AutoEatTab = AutomaticSection:Tab({
     Icon = "utensils"
 })
 
-local AutoEatToggle = AutoEatTab:Toggle({
+getgenv().AutoEatToggle = AutoEatTab:Toggle({
     Title = "Enable",
     Desc = [[
 Toggles auto eating when the hunger reaches a certain level.
@@ -213,10 +214,20 @@ Automatically selects the first dish it can find and consumes it. DOES NOT LOOK 
 Only works if Auto Fish is enabled.
 ]],
     Icon = "check",
-    Type = "Toggle",
-    Callback = function (state)
-        -- Set on/off
-    end
+    Type = "Toggle"
+})
+
+getgenv().AutoEatLevelSlider = AutoEatTab:Slider({
+    Title = "Auto Eat Level",
+    Desc = [[
+Controls at what level of hunger it should automatically eat.
+]],
+    Step = 1,
+    Value = {
+        Min = 1,
+        Max = 99,
+        Default  =50
+    }
 })
 
 -- Misc Section
