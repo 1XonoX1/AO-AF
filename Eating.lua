@@ -129,6 +129,7 @@ getgenv().EatDish = function ()
 
     local DishItem = LocalPlayer.Character:WaitForChild(DishName)
 
+    task.wait(1)
     ToolActionRemote:FireServer(DishItem)
 
     repeat
@@ -139,7 +140,6 @@ getgenv().EatDish = function ()
     local ParsedAmount = tonumber(AmountLabel.Text)
 
     if ParsedAmount < 100 then
-        task.wait()
         getgenv().EatDish()
     end
 end
