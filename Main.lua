@@ -9,6 +9,8 @@ getgenv().AutoFishToggle = nil
 getgenv().ReelSpeedSlider = nil
 getgenv().ReelSpeedRandomnessSlider = nil
 getgenv().CastAgainWaitSlider = nil
+getgenv().AutoEatToggle = nil
+getgenv().AutoEatLevelSlider = nil
 getgenv().DiscordWebhookToggle = nil
 getgenv().DiscordWebhookTokenInput = nil
 
@@ -27,6 +29,10 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/1XonoX1/AO-AF/refs/he
 -- ESP Code
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/1XonoX1/AO-AF/refs/heads/main/ESP.lua"))()
+
+--- Eating Code
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/1XonoX1/AO-AF/refs/heads/main/Eating.lua"))()
 
 -- UI Code
 
@@ -214,7 +220,12 @@ Automatically selects the first dish it can find and consumes it. DOES NOT LOOK 
 Only works if Auto Fish is enabled.
 ]],
     Icon = "check",
-    Type = "Toggle"
+    Type = "Toggle",
+    Callback = function (state)
+        getgenv().WindUI:Notify({
+            Title = ((state and "Enabled") or (not state and "Disabled")) .. " AutoEat"
+        })
+    end
 })
 
 getgenv().AutoEatLevelSlider = AutoEatTab:Slider({
@@ -449,6 +460,8 @@ local SaveButton = ConfigTab:Button({
         ConfigData:Register("ReelSpeedSlider", getgenv().ReelSpeedSlider)
         ConfigData:Register("ReelSpeedRandomnessSlider", getgenv().ReelSpeedRandomnessSlider)
         ConfigData:Register("CastAgainWaitSlider", getgenv().CastAgainWaitSlider)
+        ConfigData:Register("AutoEatToggle", getgenv().AutoEatToggle)
+        ConfigData:Register("AutoEatLevelSlider", getgenv().AutoEatLevelSlider)
         ConfigData:Register("ESPToggle", ESPToggle)
         ConfigData:Register("DiscordWebhookToggle", getgenv().DiscordWebhookToggle)
         ConfigData:Register("DiscordWebhookTokenInput", getgenv().DiscordWebhookTokenInput)
@@ -505,6 +518,8 @@ local LoadButton = ConfigTab:Button({
 
         ESPToggle:Set(JSONData.Elements.ESPToggle.value)
 
+        getgenv().AutoEatLevelSlider:Set(JSONData.Elements.AutoEatLevelSlider.value)
+        getgenv().AutoEatToggle:Set(JSONData.Elements.AutoEatToggle.value)
         getgenv().CastAgainWaitSlider:Set(JSONData.Elements.CastAgainWaitSlider.value)
         getgenv().ReelSpeedRandomnessSlider:Set(JSONData.Elements.ReelSpeedRandomnessSlider.value)
         getgenv().ReelSpeedSlider:Set(JSONData.Elements.ReelSpeedSlider.value)
