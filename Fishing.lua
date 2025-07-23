@@ -1,11 +1,3 @@
-for i,v in pairs(getgenv().ReelSpeedSlider.Value) do
-    print(i, v)
-end
-
-for i,v in pairs(getgenv().ReelSpeedRandomnessSlider.Value) do
-    print(i, v)
-end
-
 local ShouldReel = false
 
 local Players = game:GetService("Players")
