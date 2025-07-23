@@ -118,7 +118,7 @@ local function CheckAutoEat ()
 
     -- getgenv().StopAll()
 
-    task.wait(0.5)
+    task.wait(1)
 
     LocalPlayer.Character.Humanoid:EquipTool(PreviousRod)
 end
