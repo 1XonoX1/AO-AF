@@ -110,11 +110,11 @@ local function CheckAutoEat ()
 
     local ParsedAmount = tonumber(AmountLabel.Text)
 
+    local PreviousRod = GetEquippedRod()
+
     if ParsedAmount <= tonumber(getgenv().AutoEatLevelSlider.Value.Default) then 
         getgenv().EatDish()
     end
-
-    local PreviousRod = GetEquippedRod()
 
     -- getgenv().StopAll()
 
