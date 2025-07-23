@@ -137,15 +137,11 @@ local function StopReeling ()
         NotificationListener = nil
     end
 
-    for i, v in pairs(getgenv().LastCatch) do
-        print(i, v)
-    end
-
     coroutine.wrap(
         function ()
             getgenv().SendWebhook()
             getgenv().WindUI:Notify({
-                Title = "Caught " .. (getgenv().LastCatch and (getgenv().LastCatch.Alt .. " ") or "") .. getgenv().LastCatch.Name,
+                Title = "Caught " .. (getgenv().LastCatch and getgenv().LastCatch.Alt and (getgenv().LastCatch.Alt .. " ") or "") .. getgenv().LastCatch.Name,
                 Duration = 5
             })
         end
