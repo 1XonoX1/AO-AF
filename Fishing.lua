@@ -148,8 +148,9 @@ local function StopReeling ()
     )()
 
     if getgenv().AutoEatToggle.Value then
+        task.wait(1)
         CheckAutoEat()
-        task.wait()
+        task.wait(1)
     end
 
     print("AutoFish | Stopped reeling, waiting", getgenv().CastAgainWaitSlider.Value.Default, "seconds")
